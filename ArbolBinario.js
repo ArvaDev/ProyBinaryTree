@@ -7,7 +7,7 @@ class Nodo {
     }
 }
 
-// Definimos el arbol
+// Definimos el árbol binario de búsqueda
 class BinaryTree {
     constructor() {
         this.raiz = null;
@@ -15,7 +15,7 @@ class BinaryTree {
 
     // Función del árbol para agregar un valor
     insertar(valor) {
-        // Crear nodo
+        // Crear nodo nuevo
         const nodoNuevo = new Nodo(valor);
         // Si el árbol está vacío
         if (this.raiz === null) {
@@ -25,10 +25,11 @@ class BinaryTree {
         else {
             // Buscar la posición en el árbol si ya tiene datos
             let nodoActual = this.raiz;
+            
             while (true) {
-                // Si es menor se va al sub- árbol de la izquierda
+                // Si es menor se va al sub-árbol de la izquierda
                 if (valor < nodoActual.valor) {
-                    // Si el hijo de la izquierda está vacío se inserta un nodo
+                    // Si el hijo de la izquierda está vacío, se inserta un nodo
                     if (nodoActual.izquierda === null) {
                         nodoActual.izquierda = nodoNuevo;
                         return true;
@@ -36,64 +37,56 @@ class BinaryTree {
                     // Se mueve hacia el nodo de la izquierda
                     nodoActual = nodoActual.izquierda;
                 }
-                // Si es mayor o igual te vas a la derecha
+                // Si es mayor o igual, se va al sub-árbol de la derecha
                 else {
                     // Si el sub-árbol derecho es nulo, se inserta un nuevo nodo
                     if (nodoActual.derecha === null) {
                         nodoActual.derecha = nodoNuevo;
                         return true;
                     }
-                    // Te mueves al nodo de la derecha
+                    // Se mueve hacia el nodo de la derecha
                     nodoActual = nodoActual.derecha;
                 }
             }
         }
     }
 
-    // Función para la búsquedaPP
-    buscar(valor) {
-        // Se inicia la búsqueda en la raíz
-        let nodoActual = this.raiz;
-        let coincidencias = [];
-        // Función interna recursiva para realizar la búsqueda en el árbol
+    // Función para buscar y retornar un arreglo de coincidencias
+    buscarCoincidencias(valor) {
+        const coincidencias = []; // Arreglo para almacenar las coincidencias
+
+        // Función recursiva para buscar coincidencias en el árbol
         function buscarRecursivo(nodo) {
-            // Si el nodo actual es nulo, termina la recursión
             if (nodo === null) {
                 return;
-
             }
 
-            // Si encuentras el valor, lo agregas al array de coincidencias
             if (valor === nodo.valor) {
                 coincidencias.push(nodo.valor);
             }
 
-            buscarRecursivo(nodo.izquierda);
-            buscarRecursivo(nodo.derecha);
+            buscarRecursivo(nodo.izquierda); // Buscar en el subárbol izquierdo
+            buscarRecursivo(nodo.derecha);   // Buscar en el subárbol derecho
         }
-        // Llama a la función de búsqueda recursiva para encontrar todas las coincidencias
-        buscarRecursivo(nodoActual);
 
-        // Retorna el array de coincidencias encontrado
-        return coincidencias;
+        buscarRecursivo(this.raiz); // Comenzar la búsqueda desde la raíz
+
+        return coincidencias; // Retornar el arreglo de coincidencias
     }
 }
 
 
-
-
-// Ejemplo de uso
 const binaryTree = new BinaryTree();
+
 binaryTree.insertar(5);
 binaryTree.insertar(2);
 binaryTree.insertar(2);
-binaryTree.insertar(8);
+binaryTree.insertar(3);
 binaryTree.insertar(8);
 
-//Método buscar y notificar si encuentra primera coincidencia pero cree una nueva instancia y busque en un arbol vacio
-const myTree = new BinaryTree();
-console.log(myTree.buscar(5));
-console.log(myTree.buscar(5));
-//por que ahora si funciona, y un momento atras me decia que mi metodo no estaba definido en mi objeto
-console.log(binaryTree.buscar(5));
-console.log(binaryTree.buscar(8));
+
+// Llamar a buscarCoincidencias para encontrar coincidencias del valor 3
+const coincidencias = binaryTree.buscarCoincidencias(2);
+
+console.log(coincidencias); 
+
