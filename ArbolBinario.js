@@ -90,10 +90,7 @@ class Nodo {
         binaryTree.insertar(8); 
         binaryTree.insertar(8); 
        
-            //Método buscar y notificar si encuentra primera coincidencia pero cree una nueva instancia y busque en un arbol vacio
-            const myTree = new BinaryTree();
-             console.log(myTree.buscar(5)); 
-             console.log(myTree.buscar(5));  
+            
              //por que ahora si funciona, y un momento atras me decia que mi metodo no estaba definido en mi objeto
             console.log(binaryTree.buscar(5)); 
             console.log(binaryTree.buscar(8));
