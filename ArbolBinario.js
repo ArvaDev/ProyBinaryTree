@@ -1,4 +1,9 @@
 // Creamos la clase de nodos
+
+//Jose Norberto López Gómez
+//Isai Abel López Sanchez
+//Armando Rodríguez Villarreal
+
 class Nodo {
     constructor(valor) {
         this.valor = valor;
